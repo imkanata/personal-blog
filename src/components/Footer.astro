@@ -1,0 +1,44 @@
+---
+const today = new Date();
+---
+
+<footer>
+	<p>© {today.getFullYear()} Your Name</p>
+
+	<div class="links">
+		<a href="https://github.com/imkanata" target="_blank">GitHub</a>
+		<a href="mailto:furudoerk@gmail.com">Email</a>
+	</div>
+</footer>
+
+<style>
+	footer {
+		max-width: 800px;
+		margin: 0 auto;
+		padding: 3rem 1.5rem;
+		border-top: 1px solid #ddd;
+		text-align: center;
+		color: #666;
+	}
+
+	footer p {
+		margin: 0 0 1rem;
+		font-size: 0.9rem;
+	}
+
+	.links {
+		display: flex;
+		justify-content: center;
+		gap: 2rem;
+	}
+
+	.links a {
+		color: #666;
+		text-decoration: none;
+	}
+
+	.links a:hover {
+		color: var(--black);
+		text-decoration: underline;
+	}
+</style>

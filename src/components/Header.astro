@@ -1,0 +1,122 @@
+---
+import { SITE_TITLE } from '../consts';
+import HeaderLink from './HeaderLink.astro';
+---
+
+<header>
+	<nav>
+		<h2>
+			<a href="/">{SITE_TITLE}</a>
+		</h2>
+
+		<div class="internal-links">
+			<HeaderLink href="/">Home</HeaderLink>
+			<HeaderLink href="/blog">Blog</HeaderLink>
+		</div>
+	</nav>
+</header>
+<style>
+	header {
+		position: relative;
+		width: 100%;
+		background: rgba(247, 245, 239, 0.88);
+		border-bottom: 1px solid #d8ded3;
+		backdrop-filter: blur(12px);
+	}
+
+	nav {
+		max-width: 1100px;
+		margin: 0 auto;
+		padding: 0 2rem;
+		min-height: 72px;
+
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	h2 {
+		margin: 0;
+		font-family: Georgia, "Times New Roman", serif;
+		font-size: 1.15rem;
+		font-weight: 400;
+		letter-spacing: -0.02em;
+	}
+
+	h2 a {
+		color: #344338;
+		text-decoration: none;
+	}
+
+	.internal-links {
+		display: flex;
+		align-items: center;
+		gap: 0.4rem;
+	}
+
+	nav a {
+		padding: 0.5rem 0.75rem;
+		color: #687267;
+		text-decoration: none;
+		font-size: 0.9rem;
+		transition:
+			color 0.2s ease,
+			background 0.2s ease;
+	}
+
+	nav a:hover {
+		color: #344338;
+	}
+
+	nav a.active {
+		color: #344338;
+		background: #e7eee1;
+		border-radius: 999px;
+	}
+
+	.social-links,
+	.social-links a {
+		display: flex;
+	}
+
+	.social-links {
+		margin-left: 1rem;
+		gap: 0.5rem;
+	}
+
+	.social-links a {
+		padding: 0.35rem;
+		color: #6f7c6c;
+	}
+
+	.social-links a:hover {
+		color: #3f5143;
+		background: transparent;
+	}
+
+	@media (max-width: 720px) {
+		nav {
+			padding: 0 1.25rem;
+			min-height: 64px;
+		}
+
+		.social-links {
+			display: none;
+		}
+	}
+
+	@media (max-width: 520px) {
+		h2 {
+			font-size: 1rem;
+		}
+
+		.internal-links {
+			gap: 0;
+		}
+
+		nav a {
+			padding: 0.45rem 0.5rem;
+			font-size: 0.85rem;
+		}
+	}
+</style>

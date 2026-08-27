@@ -1,0 +1,323 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../../components/BaseHead.astro';
+import Footer from '../../components/Footer.astro';
+import Header from '../../components/Header.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
+
+const posts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title={`Blog | ${SITE_TITLE}`}
+			description={SITE_DESCRIPTION}
+		/>
+	</head>
+
+	<body>
+		<Header />
+
+		<main>
+			<header class="blog-header">
+	<p class="intro">
+		Notes from research, code, learning and the small
+		moments in life.　みんなだいすき！
+	</p>
+</header>
+			<div class="ornament">
+				<span>❦</span>
+			</div>
+
+			<section class="blog-list">
+				{
+					posts.map((post) => (
+						<article class="post">
+							<div class="post-meta">
+								<div class={`category category-${post.data.category ?? 'essay'}`}>
+									{post.data.category ?? 'essay'}
+								</div>
+
+								<div class="date">
+									<FormattedDate
+										date={post.data.pubDate}
+									/>
+								</div>
+							</div>
+
+							<div class="post-content">
+								<h2>
+									<a href={`/blog/${post.id}/`}>
+										{post.data.title}
+									</a>
+								</h2>
+
+								<p class="description">
+									{post.data.description}
+								</p>
+
+								<a
+									class="read-more"
+									href={`/blog/${post.id}/`}
+								>
+									Read more <span>→</span>
+								</a>
+							</div>
+						</article>
+					))
+				}
+			</section>
+
+			{
+				posts.length === 0 && (
+					<p class="empty">
+						Nothing here yet. I'm still writing.
+					</p>
+				)
+			}
+		</main>
+
+		<Footer />
+	</body>
+</html>
+
+<style>
+	:global(body) {
+		background:
+			radial-gradient(
+				circle at top right,
+				rgba(202, 220, 195, 0.5),
+				transparent 30%
+			),
+			radial-gradient(
+				circle at bottom left,
+				rgba(225, 214, 190, 0.4),
+				transparent 28%
+			),
+			#f5f3ed;
+		color: #344338;
+	}
+
+	main {
+		max-width: 880px;
+		margin: 3rem auto 5rem;
+		padding: 5rem 4.5rem 6rem;
+		background: rgba(255, 253, 248, 0.8);
+		border: 1px solid rgba(74, 93, 75, 0.12);
+		border-radius: 24px;
+		box-shadow: 0 20px 60px rgba(48, 66, 50, 0.08);
+	}
+
+	/* Header */
+
+	.blog-header {
+		margin-bottom: 3.5rem;
+		text-align: center;
+	}
+
+	.eyebrow {
+		margin: 0 0 1.25rem;
+		font-size: 0.72rem;
+		letter-spacing: 0.18em;
+		color: #788671;
+	}
+
+	.blog-header h1 {
+		margin: 0 0 1.25rem;
+		font-family: Georgia, "Times New Roman", serif;
+		font-size: clamp(3.8rem, 9vw, 6rem);
+		font-weight: 400;
+		letter-spacing: -0.05em;
+		line-height: 0.95;
+		color: #304137;
+	}
+
+	.intro {
+		max-width: 500px;
+		margin: 0 auto;
+		line-height: 1.9;
+		color: #687267;
+	}
+
+	/* Ornament */
+
+	.ornament {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		margin-bottom: 3rem;
+		color: #91a08a;
+	}
+
+	.ornament::before,
+	.ornament::after {
+		flex: 1;
+		height: 1px;
+		background: #d7ded2;
+		content: "";
+	}
+
+	/* Posts */
+
+	.blog-list {
+		border-top: 1px solid #d8ded3;
+	}
+
+	.post {
+		display: grid;
+		grid-template-columns: 140px 1fr;
+		gap: 2.5rem;
+		padding: 2.75rem 0;
+		border-bottom: 1px solid #d8ded3;
+		transition:
+			transform 0.25s ease,
+			background 0.25s ease;
+	}
+
+	.post:hover {
+		transform: translateX(6px);
+	}
+
+	.post-meta {
+		padding-top: 0.25rem;
+	}
+
+	.category {
+		display: inline-block;
+		margin-bottom: 0.9rem;
+		padding: 0.35rem 0.8rem;
+		border-radius: 999px;
+		font-size: 0.75rem;
+		letter-spacing: 0.04em;
+	}
+
+	/* Different category colors */
+
+	.category-life {
+		background: #e4eddf;
+		color: #587052;
+	}
+
+	.category-study {
+		background: #e4ebef;
+		color: #58707a;
+	}
+
+	.category-research {
+		background: #e9e4d9;
+		color: #75664c;
+	}
+
+	.category-programming {
+		background: #dde9e2;
+		color: #466456;
+	}
+
+	.category-essay {
+		background: #eee3dc;
+		color: #826357;
+	}
+
+	.date {
+		font-size: 0.8rem;
+		line-height: 1.5;
+		color: #929a90;
+	}
+
+	/* Content */
+
+	.post-content h2 {
+		margin: 0 0 0.8rem;
+		font-size: 1.5rem;
+		font-weight: 500;
+		line-height: 1.5;
+	}
+
+	.post-content h2 a {
+		color: #344338;
+		text-decoration: none;
+		transition: color 0.2s ease;
+	}
+
+	.post-content h2 a:hover {
+		color: #71806b;
+	}
+
+	.description {
+		margin: 0 0 1.3rem;
+		line-height: 1.9;
+		color: #6c756b;
+	}
+
+	.read-more {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		color: #52674f;
+		font-size: 0.88rem;
+		text-decoration: none;
+	}
+
+	.read-more span {
+		transition: transform 0.2s ease;
+	}
+
+	.read-more:hover {
+		color: #304137;
+	}
+
+	.read-more:hover span {
+		transform: translateX(4px);
+	}
+
+	/* Empty */
+
+	.empty {
+		padding: 3rem 0;
+		text-align: center;
+		font-family: Georgia, "Times New Roman", serif;
+		font-style: italic;
+		color: #7d877b;
+	}
+
+	/* Mobile */
+
+	@media (max-width: 700px) {
+		main {
+			margin: 0;
+			padding: 4rem 1.5rem 5rem;
+			border: none;
+			border-radius: 0;
+			box-shadow: none;
+		}
+
+		.blog-header {
+			margin-bottom: 3rem;
+		}
+
+		.post {
+			grid-template-columns: 1fr;
+			gap: 1rem;
+			padding: 2.25rem 0;
+		}
+
+		.post-meta {
+			display: flex;
+			align-items: center;
+			gap: 1rem;
+		}
+
+		.category {
+			margin-bottom: 0;
+		}
+
+		.post-content h2 {
+			font-size: 1.3rem;
+		}
+	}
+</style>
