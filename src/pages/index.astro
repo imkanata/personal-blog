@@ -15,39 +15,51 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 		<Header />
 
 		<main>
+			<!-- Hero / Introduction -->
 			<section class="intro">
-				<p class="eyebrow">✦ RESEARCH · CODE · LIFE</p>
+				<div class="intro-text">
+					<p class="eyebrow">✦ RESEARCH · CODE · LIFE</p>
 
-				<h2>Siyu Ding</h2>
+					<h2>Siyu Ding / テイ　シウ</h2>
 
-				<p class="welcome">
-					Welcome to my little corner of the internet.
-				</p>
+					<p class="welcome">
+						Welcome to my little corner of the internet.
+					</p>
 
-				<p class="bio">
-    I am currently a research student at&nbsp;<strong>Ochanomizu University</strong> in Tokyo, Japan.
-</p>
+					<p class="bio">
+						I am currently a research student at&nbsp
+						<strong>Ochanomizu University</strong> in Tokyo, Japan.
+					</p>
 
-				<p class="bio">
-					I write about research, programming, learning,
-					and small moments in life.
-				</p>
+					<p class="bio">
+						I write about research, programming, learning,
+						and small moments in life.
+					</p>
 
-				<div class="links">
-					<a
-						href="https://github.com/imkanata"
-						target="_blank"
-					>
-						GitHub ↗
-					</a>
+					<div class="links">
+						<a
+							href="https://github.com/imkanata"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							GitHub ↗
+						</a>
 
-					<a href="/blog">
-						Read my blog →
-					</a>
+						<a href="/blog">
+							Read my blog →
+						</a>
 
-					<a href="mailto:furudoerk@gmail.com">
-						Email ↗
-					</a>
+						<a href="mailto:furudoerk@gmail.com">
+							Email ↗
+						</a>
+					</div>
+				</div>
+
+				<div class="profile-image">
+					<img
+						src="/profile.jpg"
+						alt="Portrait of Siyu Ding"
+					/>
 				</div>
 			</section>
 
@@ -55,16 +67,29 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 				<span>❦</span>
 			</div>
 
+			<!-- About -->
 			<section class="about">
 				<p class="section-label">01 / ABOUT</p>
 
 				<h2>A little about me</h2>
 
 				<p>
-					I have a background in computer science and enjoy exploring how programming and data can be used to understand real-world problems. I am currently interested in algorithms, Python, and data analysis, and I am beginning to explore research in meteorology and climate data.
+					I have a background in computer science and enjoy exploring how
+					programming and data can be used to understand real-world problems.
+					I am currently a research student at Ochanomizu University, working in
+					<a
+						href="https://sites.google.com/site/tsubasakohyama/%E7%A5%9E%E5%B1%B1%E7%A0%94%E7%A9%B6%E5%AE%A4"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						Professor Tsubasa Kohyama's Laboratory
+					</a>.
+					I am currently interested in algorithms, Python, and data analysis,
+					and I am beginning to explore research in meteorology and climate data.
 				</p>
 			</section>
 
+			<!-- Education -->
 			<section class="education">
 				<p class="section-label">02 / EDUCATION</p>
 
@@ -76,7 +101,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 
 						<div>
 							<h3>Ochanomizu University</h3>
-							<p>M.Sc. in Science</p>
+							<p>Research Student · Science</p>
 						</div>
 					</div>
 
@@ -94,6 +119,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 				</div>
 			</section>
 
+			<!-- Interests -->
 			<section class="interests">
 				<p class="section-label">03 / INTERESTS</p>
 
@@ -109,6 +135,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 				</div>
 			</section>
 
+			<!-- Projects -->
 			<section class="projects">
 				<p class="section-label">04 / PROJECTS</p>
 
@@ -128,6 +155,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 				</div>
 			</section>
 
+			<!-- Closing -->
 			<section class="closing">
 				<p>Thanks for stopping by.</p>
 
@@ -144,12 +172,12 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 		background:
 			radial-gradient(
 				circle at top left,
-				rgba(202, 220, 195, 0.55),
+				rgba(202, 220, 195, 0.45),
 				transparent 32%
 			),
 			radial-gradient(
 				circle at bottom right,
-				rgba(224, 213, 188, 0.45),
+				rgba(224, 213, 188, 0.35),
 				transparent 30%
 			),
 			#f5f3ed;
@@ -157,73 +185,101 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 	}
 
 	main {
-		max-width: 880px;
-		margin: 3rem auto 5rem;
-		padding: 5rem 4.5rem 6rem;
-		background: rgba(255, 253, 248, 0.78);
+		max-width: 960px;
+		margin: 2.5rem auto 5rem;
+		padding: 4.5rem 5rem 5.5rem;
+		background: rgba(255, 253, 248, 0.8);
 		border: 1px solid rgba(74, 93, 75, 0.12);
 		border-radius: 24px;
 		box-shadow: 0 20px 60px rgba(48, 66, 50, 0.08);
 	}
 
 	section {
-		margin-bottom: 5.5rem;
+		margin-bottom: 5rem;
 	}
 
-	/* Intro */
+	/* =====================
+	   INTRO
+	===================== */
 
 	.intro {
-		margin-bottom: 4rem;
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) 250px;
+		gap: 3.5rem;
+		align-items: center;
+		margin-bottom: 4.5rem;
+	}
+
+	.intro-text {
+		max-width: 580px;
+	}
+
+	.profile-image {
+		display: flex;
+		justify-content: flex-end;
+		align-items: center;
+	}
+
+	.profile-image img {
+		display: block;
+		width: 240px;
+		height: 320px;
+		object-fit: cover;
+		object-position: center;
+		border-radius: 14px;
+		box-shadow: 0 14px 35px rgba(48, 66, 50, 0.13);
 	}
 
 	.eyebrow,
 	.section-label {
-		margin: 0 0 1.25rem;
+		margin: 0 0 1rem;
 		font-size: 0.72rem;
 		letter-spacing: 0.16em;
 		color: #788671;
 	}
 
 	.intro h1 {
-		margin: 0 0 1.5rem;
+		margin: 0 0 1.25rem;
 		font-family: Georgia, "Times New Roman", serif;
-		font-size: clamp(3.8rem, 9vw, 6rem);
+		font-size: clamp(3.5rem, 7vw, 5.2rem);
 		font-weight: 400;
-		letter-spacing: -0.05em;
-		line-height: 0.95;
+		letter-spacing: -0.045em;
+		line-height: 1;
 		color: #304137;
 	}
 
 	.welcome {
-		margin-bottom: 2rem;
+		max-width: 470px;
+		margin: 0 0 1.8rem;
 		font-family: Georgia, "Times New Roman", serif;
-		font-size: 1.35rem;
+		font-size: 1.25rem;
 		font-style: italic;
+		line-height: 1.6;
 		color: #6e7d70;
 	}
 
 	.bio {
-		max-width: 650px;
-		margin-bottom: 0.8rem;
-		font-size: 1.05rem;
+		max-width: 560px;
+		margin: 0 0 0.8rem;
+		font-size: 1rem;
 		line-height: 1.9;
 		color: #5f695f;
 	}
 
 	.bio strong {
 		color: #3d5142;
-		font-weight: 400;
+		font-weight: 500;
 	}
 
 	.links {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 1rem;
-		margin-top: 2.5rem;
+		gap: 0.75rem;
+		margin-top: 2rem;
 	}
 
 	.links a {
-		padding: 0.65rem 1rem;
+		padding: 0.6rem 1rem;
 		border: 1px solid #cbd5c7;
 		border-radius: 999px;
 		color: #4b614d;
@@ -238,13 +294,15 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 		transform: translateY(-2px);
 	}
 
-	/* Divider */
+	/* =====================
+	   DIVIDER
+	===================== */
 
 	.divider {
 		display: flex;
 		align-items: center;
 		gap: 1rem;
-		margin: 0 0 5rem;
+		margin: 0 0 4.5rem;
 		color: #91a08a;
 	}
 
@@ -256,12 +314,14 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 		content: "";
 	}
 
-	/* General */
+	/* =====================
+	   GENERAL
+	===================== */
 
 	h2 {
-		margin: 0 0 1.5rem;
+		margin: 0 0 1.25rem;
 		font-family: Georgia, "Times New Roman", serif;
-		font-size: 2.2rem;
+		font-size: 2.1rem;
 		font-weight: 400;
 		letter-spacing: -0.03em;
 		color: #35463a;
@@ -275,12 +335,21 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 	}
 
 	section > p:not(.section-label) {
-		max-width: 680px;
+		max-width: 700px;
 		line-height: 1.9;
 		color: #626b62;
 	}
 
-	/* Education */
+	.about a {
+		color: #526b55;
+		text-decoration: underline;
+		text-decoration-color: #bdc8b8;
+		text-underline-offset: 3px;
+	}
+
+	/* =====================
+	   EDUCATION
+	===================== */
 
 	.timeline {
 		border-left: 1px solid #ccd6c7;
@@ -319,7 +388,9 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 		color: #747d73;
 	}
 
-	/* Interests */
+	/* =====================
+	   INTERESTS
+	===================== */
 
 	.tags {
 		display: flex;
@@ -344,7 +415,9 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 		color: #75654d;
 	}
 
-	/* Projects */
+	/* =====================
+	   PROJECTS
+	===================== */
 
 	.project-card {
 		display: grid;
@@ -368,11 +441,13 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 		color: #70796f;
 	}
 
-	/* Closing */
+	/* =====================
+	   CLOSING
+	===================== */
 
 	.closing {
 		margin-bottom: 0;
-		padding-top: 3rem;
+		padding-top: 2rem;
 		text-align: center;
 	}
 
@@ -394,12 +469,14 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 		text-underline-offset: 5px;
 	}
 
-	/* Mobile */
+	/* =====================
+	   MOBILE
+	===================== */
 
 	@media (max-width: 700px) {
 		main {
 			margin: 0;
-			padding: 4rem 1.5rem 5rem;
+			padding: 3.5rem 1.5rem 5rem;
 			border: none;
 			border-radius: 0;
 			box-shadow: none;
@@ -407,6 +484,24 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 
 		section {
 			margin-bottom: 4rem;
+		}
+
+		.intro {
+			grid-template-columns: 1fr;
+			gap: 2.5rem;
+		}
+
+		.profile-image {
+			justify-content: flex-start;
+		}
+
+		.profile-image img {
+			width: 200px;
+			height: 270px;
+		}
+
+		.intro h1 {
+			font-size: 4rem;
 		}
 
 		.timeline-item {
@@ -417,10 +512,6 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 
 		.project-card {
 			grid-template-columns: 1fr;
-		}
-
-		.intro h1 {
-			font-size: 4rem;
 		}
 	}
 </style>
