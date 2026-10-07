@@ -1,0 +1,205 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseHead from '../../components/BaseHead.astro';
+import Footer from '../../components/Footer.astro';
+import Header from '../../components/Header.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
+
+const notes = (await getCollection('notes')).sort(
+	(a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+
+const renderedNotes = await Promise.all(
+	notes.map(async (note) => ({
+		...note,
+		Content: (await render(note)).Content,
+	})),
+);
+
+---
+
+<html lang="en">
+	<head>
+		<BaseHead title={`Notes · ${SITE_TITLE}`} description="Short notes, thoughts, and everyday observations." />
+		<style>
+			main {
+				width: min(800px, calc(100% - 2rem));
+				margin: 0 auto;
+				padding: 4rem 0 6rem;
+			}
+
+			.notes-intro {
+				margin-bottom: 4rem;
+				text-align: center;
+			}
+
+			.notes-label {
+				margin-bottom: 1rem;
+				color: #6f8068;
+				font-size: 0.8rem;
+				font-weight: 700;
+				letter-spacing: 0.18em;
+				text-transform: uppercase;
+			}
+
+			.notes-intro h1 {
+				margin: 0 0 1rem;
+				color: #304232;
+				font-family: Georgia, 'Times New Roman', serif;
+				font-size: clamp(2.5rem, 6vw, 4rem);
+				font-weight: 400;
+			}
+
+			.notes-intro p {
+				max-width: 600px;
+				margin: 0 auto;
+				color: #697267;
+				font-size: 1rem;
+				line-height: 1.8;
+			}
+
+			.notes-list {
+				position: relative;
+			}
+
+			.note {
+				position: relative;
+				display: grid;
+				grid-template-columns: 130px 1fr;
+				gap: 2.5rem;
+				padding: 2.5rem 0;
+				border-top: 1px solid rgba(48, 66, 50, 0.14);
+			}
+
+			.note:first-child {
+				border-top: 1px solid rgba(48, 66, 50, 0.14);
+			}
+
+			.note-date {
+				padding-top: 0.25rem;
+				color: #7b8679;
+				font-family: Georgia, 'Times New Roman', serif;
+				font-size: 0.95rem;
+				line-height: 1.6;
+			}
+
+			.note-content {
+				color: #3f4940;
+				font-size: 1rem;
+				line-height: 1.9;
+			}
+
+			.note-content p {
+				margin: 0 0 1.2rem;
+			}
+
+			.note-content p:last-child {
+				margin-bottom: 0;
+			}
+
+			.note-content h2,
+			.note-content h3 {
+				margin-top: 1.5rem;
+				margin-bottom: 0.8rem;
+				color: #304232;
+				font-family: Georgia, 'Times New Roman', serif;
+				font-weight: 500;
+			}
+
+			.note-content ul,
+			.note-content ol {
+				margin: 1rem 0;
+				padding-left: 1.5rem;
+			}
+
+			.note-content li {
+				margin: 0.4rem 0;
+			}
+
+			.note-content blockquote {
+				margin: 1.5rem 0;
+				padding: 0.8rem 1.2rem;
+				border-left: 3px solid #8a9b82;
+				background: rgba(138, 155, 130, 0.08);
+				color: #667064;
+			}
+
+			.note-content code {
+				padding: 0.15em 0.35em;
+				border-radius: 4px;
+				background: rgba(48, 66, 50, 0.08);
+			}
+
+			.note-content pre {
+				margin: 1.5rem 0;
+				padding: 1rem;
+				overflow-x: auto;
+				border-radius: 8px;
+				background: rgba(48, 66, 50, 0.06);
+			}
+
+			.note-content img {
+				max-width: 100%;
+				height: auto;
+				border-radius: 8px;
+			}
+
+			@media (max-width: 700px) {
+				main {
+					padding-top: 3rem;
+				}
+
+				.notes-intro {
+					margin-bottom: 2rem;
+				}
+
+				.note {
+					grid-template-columns: 1fr;
+					gap: 0.5rem;
+					padding: 2rem 0;
+				}
+
+				.note-date {
+					font-size: 0.85rem;
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		<Header />
+
+		<main>
+			<section class="notes-intro">
+				<div class="notes-label">NOTES · DIARY · EVERYDAY</div>
+				<h1>Notes</h1>
+				<p>
+					为了不让一些日子消失在记忆里，所以什么都会写，研究or日常。
+				</p>
+			</section>
+
+			<section class="notes-list">
+				{
+					renderedNotes.map((note) => {
+						const Content = note.Content;
+
+						return (
+							<article class="note">
+								<div class="note-date">
+									<FormattedDate date={note.data.date} />
+								</div>
+
+								<div class="note-content">
+									<Content />
+								</div>
+							</article>
+						);
+					})
+				}
+			</section>
+		</main>
+
+		<Footer />
+	</body>
+</html>
